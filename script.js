@@ -1,9 +1,39 @@
 /* ==========================================
-   1. VARIABLES GLOBALES DE ESTADO
+   1. VARIABLES GLOBALES DE ESTADO Y CATÁLOGO
    ========================================== */
 let precioBase = 25000;
 let precioDisenoExtra = 0;
 let disenoSeleccionado = "Flores";
+
+/**
+ * Catálogo organizado por categorías para el personalizador en tiempo real:
+ * - Cerámica
+ * - Cuadros
+ * - Materos
+ * - Porcelanas
+ */
+const catalogoPersonalizador = {
+    ceramica: [
+        { id: "taza", nombre: "☕ Taza Cerámica Clásica", precio: 25000, silueta: "pieza-taza", badge: "Cerámica" },
+        { id: "tazon", nombre: "🥣 Tazón Cerámico Rústico", precio: 28000, silueta: "pieza-taza", badge: "Cerámica" },
+        { id: "plato", nombre: "🍽️ Plato Cerámico Hondo", precio: 30000, silueta: "pieza-plato", badge: "Cerámica" }
+    ],
+    cuadros: [
+        { id: "cuadro", nombre: "🖼️ Cuadro Retablo Lienzo", precio: 35000, silueta: "pieza-cuadro", badge: "Cuadro" },
+        { id: "cuadro-mosaico", nombre: "🎨 Cuadro Mosaico Azulejo", precio: 38000, silueta: "pieza-cuadro", badge: "Cuadro" },
+        { id: "retablo", nombre: "🪵 Retablo de Madera Mini", precio: 32000, silueta: "pieza-cuadro", badge: "Cuadro" }
+    ],
+    materos: [
+        { id: "matera", nombre: "🪴 Matera Cónica Terracota", precio: 28000, silueta: "pieza-matera", badge: "Matero" },
+        { id: "matera-buho", nombre: "🦉 Matera Artesanal Búho", precio: 32000, silueta: "pieza-matera-buho", badge: "Matero" },
+        { id: "matera-mini", nombre: "🌵 Mini Maceta Suculenta", precio: 22000, silueta: "pieza-matera", badge: "Matero" }
+    ],
+    porcelanas: [
+        { id: "porcelana-plato", nombre: "🍽️ Plato de Porcelana Fina", precio: 32000, silueta: "pieza-porcelana", badge: "Porcelana" },
+        { id: "porcelana-florero", nombre: "🏺 Florero de Porcelana", precio: 36000, silueta: "pieza-porcelana-florero", badge: "Porcelana" },
+        { id: "porcelana-figura", nombre: "👼 Escultura Ángel Porcelana", precio: 40000, silueta: "pieza-porcelana", badge: "Porcelana" }
+    ]
+};
 
 /* ==========================================
    2. FUNCIONES DEL PERSONALIZADOR EN TIEMPO REAL
@@ -51,35 +81,44 @@ function cambiarDiseno(nombreDiseno, precioExtra) {
 }
 
 /**
- * Cambia la silueta física y el tipo de pieza (Taza, Plato, Matera, Cuadro)
- * aplicando dinámicamente las clases del CSS optimizado.
+ * Llena dinámicamente el selector de piezas según la categoría elegida
+ * (cerámica, cuadros, materos, porcelanas).
+ */
+function cambiarCategoria() {
+    const selectCat = document.getElementById("categoriaProducto");
+    const cat = selectCat ? selectCat.value : "ceramica";
+    const selectPieza = document.getElementById("tipoPieza");
+
+    if (!selectPieza) return;
+
+    const lista = catalogoPersonalizador[cat] || catalogoPersonalizador["ceramica"];
+    selectPieza.innerHTML = lista.map(p => `
+        <option value="${p.id}" data-precio="${p.precio}" data-silueta="${p.silueta}" data-badge="${p.badge}">
+            ${p.nombre} ($${p.precio.toLocaleString("es-CO")})
+        </option>
+    `).join('');
+
+    actualizarVista();
+}
+
+/**
+ * Cambia la silueta física, el tipo de pieza y su precio según la selección.
  */
 function actualizarVista() {
-    let selectTipo = document.getElementById("tipoCeramica");
-    let opcionSeleccionada = selectTipo.options[selectTipo.selectedIndex];
+    const selectPieza = document.getElementById("tipoPieza");
+    if (!selectPieza || !selectPieza.options || selectPieza.selectedIndex < 0) return;
 
-    // Extraer palabra limpia del tipo de cerámica
-    let tipoTexto = opcionSeleccionada.text.split(" ")[1] || opcionSeleccionada.text.split(" ")[0];
-    precioBase = parseInt(opcionSeleccionada.getAttribute("data-precio"));
+    const opcionSeleccionada = selectPieza.options[selectPieza.selectedIndex];
+    const silueta = opcionSeleccionada.getAttribute("data-silueta") || "pieza-taza";
+    const badgeText = opcionSeleccionada.getAttribute("data-badge") || "Pieza";
+    precioBase = parseInt(opcionSeleccionada.getAttribute("data-precio")) || 25000;
 
-    document.getElementById("vistaTipo").innerText = tipoTexto;
+    const badgeElem = document.getElementById("vistaTipo");
+    if (badgeElem) badgeElem.innerText = badgeText;
 
-    // Actualización de silueta mediante clases CSS avanzadas
-    let canvas = document.getElementById("canvasCeramica");
-
-    // Limpia clases previas de piezas manteniendo la clase base
-    canvas.className = "canvas-ceramica";
-
-    // Asigna la clase CSS correspondiente para activar la silueta específica
-    let tipoValor = selectTipo.value;
-    if (tipoValor === "taza") {
-        canvas.classList.add("pieza-taza");
-    } else if (tipoValor === "plato") {
-        canvas.classList.add("pieza-plato");
-    } else if (tipoValor === "matera") {
-        canvas.classList.add("pieza-matera");
-    } else if (tipoValor === "cuadro") {
-        canvas.classList.add("pieza-cuadro");
+    const canvas = document.getElementById("canvasCeramica");
+    if (canvas) {
+        canvas.className = "canvas-ceramica " + silueta;
     }
 
     calcularPrecioTotal();
@@ -320,7 +359,7 @@ function generarHtmlCatalogo(items, categoria) {
             <span class="num-item">#${item.id}</span>
             <div class="card-img-container" onclick="verImagenAmpliada('${item.imagen}', '${item.nombre}')" title="Clic para ampliar imagen">
                 <img src="${item.imagen}" alt="${item.nombre}" class="producto-img-thumb" loading="lazy">
-                <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</span>
+                <span class="zoom-badge"><i class="ph-bold ph-magnifying-glass-plus"></i> Ampliar</span>
             </div>
             <div class="card-catalogo-info">
                 <strong>${item.nombre}</strong>
@@ -328,7 +367,7 @@ function generarHtmlCatalogo(items, categoria) {
                 <div class="card-action-bar">
                     <b class="precio-destacado">${item.precio}</b>
                     <button type="button" class="btn-pedir-directo" onclick="solicitarProductoWhatsApp('${categoria}', '${item.nombre}', '${item.precio}')">
-                        <i class="fa-brands fa-whatsapp"></i> Pedir
+                        <i class="ph-fill ph-whatsapp-logo"></i> Pedir
                     </button>
                 </div>
             </div>
@@ -551,23 +590,40 @@ function consultarAsistente() {
  * Solicita confirmación y redirige a WhatsApp con los datos formateados.
  */
 function enviarPedidoWhatsApp() {
-    let tipo = document.getElementById("tipoCeramica").value;
-    let mensaje = document.getElementById("nombreText").value || "Sin mensaje";
-    let precio = document.getElementById("precioTotal").innerText;
+    const selectCat = document.getElementById("categoriaProducto");
+    const nombreCat = selectCat ? selectCat.options[selectCat.selectedIndex].text : "Cerámica";
+
+    const selectPieza = document.getElementById("tipoPieza");
+    const nombrePieza = selectPieza && selectPieza.selectedIndex >= 0 ? selectPieza.options[selectPieza.selectedIndex].text : "Pieza";
+
+    const mensaje = document.getElementById("nombreText").value.trim() || "Sin mensaje";
+    const precio = document.getElementById("precioTotal").innerText;
 
     Swal.fire({
-        title: '🚀 ¿Confirmar envío de pedido?',
-        text: 'Serás redirigido a WhatsApp con la información detallada de tu diseño.',
+        title: '🚀 ¿Confirmar pedido por WhatsApp?',
+        html: `
+            <p style="color: #555; font-size: 0.95rem; margin-bottom: 12px;">
+                Se abrirá WhatsApp con el resumen detallado de tu diseño:
+            </p>
+            <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 12px; text-align: left; font-size: 0.9rem; line-height: 1.6;">
+                <b>Categoría:</b> ${nombreCat}<br>
+                <b>Pieza:</b> ${nombrePieza}<br>
+                <b>Diseño:</b> ${disenoSeleccionado}<br>
+                <b>Mensaje:</b> "${mensaje}"<br>
+                <b>Total:</b> <span style="color: #2b9348; font-weight: bold;">${precio}</span>
+            </div>
+        `,
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#25D366',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, ir a WhatsApp 📱',
+        confirmButtonText: '<i class="ph-fill ph-whatsapp-logo"></i> Sí, ir a WhatsApp',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            let textoWhatsapp = `¡Hola Alma de Colores! 🎨 Quiero realizar un pedido:%0A` +
-                `- *Producto:* ${tipo.toUpperCase()}%0A` +
+            let textoWhatsapp = `¡Hola Alma de Colores! 🎨 Quiero realizar un pedido personalizado:%0A` +
+                `- *Categoría:* ${nombreCat}%0A` +
+                `- *Pieza:* ${nombrePieza}%0A` +
                 `- *Diseño:* ${disenoSeleccionado}%0A` +
                 `- *Texto personalizado:* ${mensaje}%0A` +
                 `- *Precio estimado:* ${precio}`;
@@ -578,7 +634,7 @@ function enviarPedidoWhatsApp() {
     });
 }
 
-/* Initialize visual preview on page load */
+/* Inicialización de categorías y vista previa al cargar */
 document.addEventListener("DOMContentLoaded", () => {
-    actualizarVista();
+    cambiarCategoria();
 }); 

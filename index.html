@@ -12,8 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Phosphor Icons (Regular, Bold, Fill) -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.2/src/regular/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.2/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.2/src/fill/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.2"></script>
+
+    <!-- Font Awesome Icons (v6.5.2) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -52,22 +58,22 @@
         <h2>Lo que ofrecemos</h2>
         <div class="grid-iconos">
             <div class="card-icono clickable" onclick="abrirModalEmpaques()">
-                <i class="fa-solid fa-boxes-packing"></i>
+                <i class="ph-bold ph-package"></i>
                 <h3>Empaques Ecológicos ♻️</h3>
                 <p>Haz clic para explorar nuestros empaques y bolsas sostenibles.</p>
             </div>
             <div class="card-icono clickable" onclick="abrirModalCreacion()">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <i class="ph-bold ph-paint-brush-broad"></i>
                 <h3>Creación 🎭</h3>
                 <p>ceramicas sin pintar escoje la tuya y te la hacemos a tu gusto</p>
             </div>
             <div class="card-icono clickable" onclick="abrirModalRegalos()">
-                <i class="fa-solid fa-gift"></i>
+                <i class="ph-bold ph-gift"></i>
                 <h3>Regalos 🛍️</h3>
                 <p>Detalles únicos para cumpleaños y momentos especiales.</p>
             </div>
             <div class="card-icono clickable" onclick="abrirModalManualidades()">
-                <i class="fa-solid fa-hands-holding-circle"></i>
+                <i class="ph-bold ph-palette"></i>
                 <h3>Manualidades 🖼️</h3>
                 <p>Gran variedad de figuras, cuadros y recuerdos.</p>
             </div>
@@ -80,18 +86,28 @@
 
         <div class="customizer-wrapper">
             <div class="panel-opciones">
+                <!-- 1. Categoría del producto -->
                 <div class="grupo-control">
-                    <label for="tipoCeramica">1. Escoge la pieza:</label>
-                    <select id="tipoCeramica" onchange="actualizarVista()">
-                        <option value="taza" data-precio="25000">☕ Taza ($25.000)</option>
-                        <option value="plato" data-precio="30000">🍽️ Plato ($30.000)</option>
-                        <option value="matera" data-precio="28000">🪴 Matera ($28.000)</option>
-                        <option value="cuadro" data-precio="35000">🖼️ Cuadro ($35.000)</option>
+                    <label for="categoriaProducto"><i class="ph-bold ph-squares-four"></i> 1. Escoge la categoría:</label>
+                    <select id="categoriaProducto" onchange="cambiarCategoria()">
+                        <option value="ceramica" selected>🏺 Cerámica</option>
+                        <option value="cuadros">🖼️ Cuadros</option>
+                        <option value="materos">🪴 Materos</option>
+                        <option value="porcelanas">✨ Porcelanas</option>
                     </select>
                 </div>
 
+                <!-- 2. Pieza de la categoría -->
                 <div class="grupo-control">
-                    <label>2. Escoge un diseño:</label>
+                    <label for="tipoPieza"><i class="ph-bold ph-shapes"></i> 2. Escoge la pieza:</label>
+                    <select id="tipoPieza" onchange="actualizarVista()">
+                        <!-- Se generará dinámicamente según la categoría elegida -->
+                    </select>
+                </div>
+
+                <!-- 3. Diseño gráfico -->
+                <div class="grupo-control">
+                    <label><i class="ph-bold ph-paint-brush"></i> 3. Escoge un diseño:</label>
                     <div class="botones-estilo">
                         <button type="button" onclick="cambiarDiseno('Flores', 0)">🌸 Flores (Gratis)</button>
                         <button type="button" onclick="cambiarDiseno('Mascotas', 3000)">🐶 Mascotas (+$3.000)</button>
@@ -100,8 +116,9 @@
                     </div>
                 </div>
 
+                <!-- 4. Texto personalizado -->
                 <div class="grupo-control">
-                    <label for="nombreText">3. Texto o Nombre personalizado:</label>
+                    <label for="nombreText"><i class="ph-bold ph-pencil-simple-line"></i> 4. Texto o Nombre personalizado:</label>
                     <input type="text" id="nombreText" placeholder="Escribe tu mensaje aquí..." maxlength="25"
                         oninput="cambiarNombre()">
                 </div>
@@ -111,7 +128,7 @@
                 </div>
 
                 <button type="button" class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
-                    <i class="fa-brands fa-whatsapp"></i> Enviar mi pedido por WhatsApp
+                    <i class="ph-fill ph-whatsapp-logo"></i> Enviar mi pedido por WhatsApp
                 </button>
             </div>
 
@@ -160,7 +177,7 @@
 
     <a href="https://wa.me/57321584727?text=Hola%20Alma%20de%20Colores,%20quisiera%20más%20información%20sobre%20sus%20manualidades."
         class="whatsapp-float" target="_blank" aria-label="Contacto por WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
+        <i class="ph-fill ph-whatsapp-logo"></i>
     </a>
 
     <!-- Librería SweetAlert2 y Script JS -->

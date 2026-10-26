@@ -150,9 +150,18 @@ nav a:focus-visible {
 }
 
 .card-icono i {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--secondary-color);
     margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card-icono:hover i {
+    transform: scale(1.15);
+    color: var(--primary-color);
 }
 
 /* ==========================================
@@ -228,19 +237,33 @@ input[type="text"]:focus {
 
 .btn-whatsapp {
     width: 100%;
-    padding: 12px;
+    padding: 13px 20px;
     background-color: var(--whatsapp-color);
     color: #ffffff;
     border: none;
     border-radius: var(--radius-sm);
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 1rem;
-    transition: filter 0.2s ease;
+    font-size: 1.05rem;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
 .btn-whatsapp:hover {
-    filter: brightness(0.95);
+    background-color: #20ba59;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+}
+
+.btn-whatsapp i {
+    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .vista-previa {
@@ -396,6 +419,75 @@ input[type="text"]:focus {
     background: #1d3557;
 }
 
+/* 5. PORCELANA: Plato decorativo fino con reflejo perlado y ribete dorado */
+.canvas-ceramica.pieza-porcelana {
+    width: 255px;
+    height: 255px;
+    background: radial-gradient(circle, #ffffff 40%, #faf8f5 75%, #ebe5db 100%);
+    border: 9px double #c9a227;
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px rgba(201, 162, 39, 0.2), 0 10px 25px rgba(201, 162, 39, 0.25);
+    margin-right: 0;
+}
+
+.canvas-ceramica.pieza-porcelana .badge-tipo {
+    background: #c9a227;
+}
+
+/* 6. FLORERO DE PORCELANA: Silueta esbelta con curva y borde oro */
+.canvas-ceramica.pieza-porcelana-florero {
+    width: 200px;
+    height: 255px;
+    background: linear-gradient(135deg, #ffffff 0%, #f6f3eb 50%, #e2dcd0 100%);
+    border: 6px solid #c9a227;
+    border-radius: 30px 30px 45px 45px;
+    box-shadow: 0 10px 22px rgba(201, 162, 39, 0.22);
+    margin-right: 0;
+}
+
+.canvas-ceramica.pieza-porcelana-florero .badge-tipo {
+    background: #c9a227;
+}
+
+/* 7. MATERA BÚHO: Silueta artesanal con detalles decorativos */
+.canvas-ceramica.pieza-matera-buho {
+    width: 220px;
+    height: 235px;
+    background: linear-gradient(180deg, #d97746 0%, #9e4624 100%);
+    border: 7px solid #7a3216;
+    border-radius: 28px 28px 36px 36px;
+    box-shadow: 0 12px 22px rgba(122, 50, 22, 0.3);
+    margin-right: 0;
+    position: relative;
+}
+
+.canvas-ceramica.pieza-matera-buho::before,
+.canvas-ceramica.pieza-matera-buho::after {
+    content: '';
+    position: absolute;
+    top: -14px;
+    width: 26px;
+    height: 26px;
+    background: #7a3216;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.canvas-ceramica.pieza-matera-buho::before {
+    left: 28px;
+}
+
+.canvas-ceramica.pieza-matera-buho::after {
+    right: 28px;
+}
+
+.canvas-ceramica.pieza-matera-buho .badge-tipo {
+    background: #7a3216;
+}
+
+.canvas-ceramica.pieza-matera-buho .texto-personalizado {
+    color: #ffffff;
+}
+
 /* ==========================================
    6. ASISTENTE Y COMENTARIOS
    ========================================== */
@@ -465,55 +557,47 @@ footer {
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 40px;
-    /* Distancia desde abajo */
-    right: 40px;
-    /* Distancia desde la derecha */
+    bottom: 35px;
+    right: 35px;
     background-color: #25d366;
-    /* Verde original de WhatsApp */
-    color: #fff;
-    border-radius: 50px;
+    color: #ffffff;
+    border-radius: 50%;
     text-align: center;
-    box-shadow: 2px 2px 3px #999;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
     z-index: 1000;
-    /* Asegura que quede por encima de todo */
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
 }
 
-/* Efecto al pasar el cursor por encima */
 .whatsapp-float:hover {
-    background-color: #128c7e;
-    /* Verde más oscuro */
-    transform: scale(1.1);
-    /* Se agranda un poco */
+    background-color: #20ba59;
+    transform: scale(1.12);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
 }
 
-/* Tamaño de la imagen/icono dentro del botón */
-.whatsapp-icon {
-    width: 35px;
-    height: 35px;
+.whatsapp-float i {
+    font-size: 34px;
+    color: #ffffff;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Adaptación para pantallas móviles */
 @media only screen and (max-width: 600px) {
     .whatsapp-float {
         bottom: 20px;
         right: 20px;
-        width: 50px;
-        height: 50px;
+        width: 52px;
+        height: 52px;
     }
 
-    .whatsapp-icon {
-        width: 28px;
-        height: 28px;
+    .whatsapp-float i {
+        font-size: 28px;
     }
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.08);
 }
 
 /* ==========================================
@@ -714,20 +798,26 @@ footer {
     background: #25d366;
     color: #ffffff;
     border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 18px;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .btn-pedir-directo:hover {
     background: #1eb954;
-    transform: scale(1.04);
+    transform: scale(1.05);
+}
+
+.btn-pedir-directo i {
+    font-size: 1.05rem;
+    display: inline-flex;
+    align-items: center;
 }
 
 @media (max-width: 600px) {
