@@ -367,7 +367,7 @@ function generarHtmlCatalogo(items, categoria) {
                 <div class="card-action-bar">
                     <b class="precio-destacado">${item.precio}</b>
                     <button type="button" class="btn-pedir-directo" onclick="solicitarProductoWhatsApp('${categoria}', '${item.nombre}', '${item.precio}')">
-                        <i class="ph-fill ph-whatsapp-logo"></i> Pedir
+                        <i class="fa-brands fa-whatsapp"></i> Pedir
                     </button>
                 </div>
             </div>
@@ -617,7 +617,7 @@ function enviarPedidoWhatsApp() {
         showCancelButton: true,
         confirmButtonColor: '#25D366',
         cancelButtonColor: '#d33',
-        confirmButtonText: '<i class="ph-fill ph-whatsapp-logo"></i> Sí, ir a WhatsApp',
+        confirmButtonText: '<i class="fa-brands fa-whatsapp"></i> Sí, ir a WhatsApp',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {

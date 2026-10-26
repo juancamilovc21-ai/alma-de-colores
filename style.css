@@ -31,7 +31,57 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body,
+button,
+input,
+select,
+textarea {
     font-family: var(--font-main);
+}
+
+/* ==========================================
+   PROTECCIÓN Y COMPATIBILIDAD DE ICONOS (PHOSPHOR Y FONT AWESOME)
+   Garantiza que el tipo de fuente de los iconos nunca sea sobrescrito por Poppins
+   ========================================== */
+.ph, .ph::before,
+.ph-bold, .ph-bold::before,
+.ph-fill, .ph-fill::before,
+.fa, .fa-solid, .fa-brands, .fa-regular,
+[class^="fa-"]::before, [class*=" fa-"]::before,
+[class^="ph-"]::before, [class*=" ph-"]::before {
+    font-style: normal !important;
+    text-transform: none !important;
+    line-height: 1 !important;
+    display: inline-block;
+}
+
+.ph, .ph::before {
+    font-family: "Phosphor" !important;
+}
+
+.ph-bold, .ph-bold::before {
+    font-family: "Phosphor-Bold" !important;
+}
+
+.ph-fill, .ph-fill::before {
+    font-family: "Phosphor-Fill" !important;
+}
+
+.fa-solid, .fa-solid::before, .fas, .fas::before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+}
+
+.fa-brands, .fa-brands::before, .fab, .fab::before {
+    font-family: "Font Awesome 6 Brands" !important;
+    font-weight: 400 !important;
+}
+
+.fa-regular, .fa-regular::before, .far, .far::before {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 400 !important;
 }
 
 body {
@@ -191,9 +241,18 @@ nav a:focus-visible {
 }
 
 .grupo-control label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 600;
     margin-bottom: 8px;
+}
+
+.grupo-control label i {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
 }
 
 select,
