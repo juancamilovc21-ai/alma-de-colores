@@ -346,7 +346,7 @@ function solicitarProductoWhatsApp(categoria, nombre, precio) {
         `- *Producto:* ${nombre}%0A` +
         `- *Precio:* ${precio}%0A` +
         `¿Me podrían dar más detalles sobre disponibilidad y envío?`;
-    let url = `https://wa.me/57321584727?text=${textoWhatsapp}`;
+    let url = `https://wa.me/573234048802?text=${textoWhatsapp}`;
     window.open(url, '_blank');
 }
 
@@ -628,13 +628,47 @@ function enviarPedidoWhatsApp() {
                 `- *Texto personalizado:* ${mensaje}%0A` +
                 `- *Precio estimado:* ${precio}`;
 
-            let url = `https://wa.me/57321584727?text=${textoWhatsapp}`;
+            let url = `https://wa.me/573234048802?text=${textoWhatsapp}`;
             window.open(url, '_blank');
         }
     });
 }
 
-/* Inicialización de categorías y vista previa al cargar */
+/**
+ * Inicializa el comportamiento interactivo del FAB Flower / Speed Dial
+ */
+function inicializarFabSpeedDial() {
+    const fabContainer = document.getElementById("fabSpeedDial");
+    const fabTrigger = document.getElementById("fabTrigger");
+
+    if (!fabContainer || !fabTrigger) return;
+
+    // Toggle al hacer clic en el botón principal
+    fabTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isActive = fabContainer.classList.toggle("active");
+        fabTrigger.setAttribute("aria-expanded", isActive ? "true" : "false");
+    });
+
+    // Cerrar al hacer clic en cualquier parte fuera del menú
+    document.addEventListener("click", (e) => {
+        if (!fabContainer.contains(e.target)) {
+            fabContainer.classList.remove("active");
+            fabTrigger.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    // Cerrar con la tecla Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && fabContainer.classList.contains("active")) {
+            fabContainer.classList.remove("active");
+            fabTrigger.setAttribute("aria-expanded", "false");
+        }
+    });
+}
+
+/* Inicialización de componentes al cargar la página */
 document.addEventListener("DOMContentLoaded", () => {
     cambiarCategoria();
+    inicializarFabSpeedDial();
 }); 

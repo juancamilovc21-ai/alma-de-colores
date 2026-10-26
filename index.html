@@ -171,13 +171,42 @@
     <footer>
         <p class="frase-motivacional">"Cada creación hecha a mano lleva un pedacito de nuestro corazón y el alma de tus
             ideas." ❤️</p>
-        <p>&copy; 2026 Alma de Colores 🎨 - Proyecto de Grado Técnico en Sistemas</p>
+        <p>&copy; 2026 Alma de Colores 🎨 - Proyecto de Grado Técnico en Sistemas - Tecnico laboral en asistencia Administrativa y Gerencial</p>
     </footer>
 
-    <a href="https://wa.me/57321584727?text=Hola%20Alma%20de%20Colores,%20quisiera%20más%20información%20sobre%20sus%20manualidades."
-        class="whatsapp-float" target="_blank" aria-label="Contacto por WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <!-- FAB Flower / Speed Dial: Redes Sociales y Contacto -->
+    <div class="fab-container fab-flower" id="fabSpeedDial">
+        <!-- Opciones en abanico de flor (cuarto de círculo) -->
+        <div class="fab-actions">
+            <!-- 1. WhatsApp -->
+            <a href="https://wa.me/573234048802?text=Hola%20Alma%20de%20Colores,%20quisiera%20más%20información%20sobre%20sus%20manualidades."
+                class="fab-action fab-whatsapp" target="_blank" rel="noopener noreferrer"
+                aria-label="Escríbenos a WhatsApp" data-tooltip="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <!-- 2. Instagram -->
+            <a href="https://www.instagram.com/alma_de_coloress?cplk=MXZ2MHIzNWpjMjAwcQ=="
+                class="fab-action fab-instagram" target="_blank" rel="noopener noreferrer"
+                aria-label="Síguenos en Instagram" data-tooltip="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <!-- 3. Facebook -->
+            <a href="https://www.facebook.com/share/1E3qk6t3C6/"
+                class="fab-action fab-facebook" target="_blank" rel="noopener noreferrer"
+                aria-label="Visítanos en Facebook" data-tooltip="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </div>
+
+        <!-- Botón principal disparador de la flor -->
+        <button type="button" class="fab-trigger" id="fabTrigger" aria-label="Abrir opciones de contacto y redes"
+            aria-expanded="false" title="Contáctanos y redes sociales">
+            <i class="fa-solid fa-comments icon-open"></i>
+            <i class="fa-solid fa-xmark icon-close"></i>
+        </button>
+    </div>
 
     <!-- Librería SweetAlert2 y Script JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
