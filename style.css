@@ -1,0 +1,742 @@
+/* ==========================================
+   1. VARIABLES GLOBALES Y RESET
+   ========================================== */
+:root {
+    --primary-color: #e85d04;
+    --primary-hover: #dc2f02;
+    --secondary-color: #f48c06;
+    --accent-yellow: #faa307;
+    --success-color: #2b9348;
+    --whatsapp-color: #25d366;
+
+    --bg-main: #fdf7f7;
+    --bg-card: #ffffff;
+    --text-dark: #333333;
+    --text-muted: #666666;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-pill: 50px;
+
+    --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 6px 20px rgba(244, 140, 6, 0.2);
+
+    --font-main: 'Poppins', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   2. ENCABEZADO Y NAVEGACIÓN
+   ========================================== */
+header {
+    background-color: var(--bg-card);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo h1 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555555;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   3. SECCIÓN HERO Y BOTONES PRINCIPALES
+   ========================================== */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('images/buho.png.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btn-main {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-main:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ==========================================
+   4. ESTRUCTURA Y TARJETAS DE ICONOS
+   ========================================== */
+.section-container,
+.icon-section {
+    padding: 50px 8%;
+    text-align: center;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.grid-iconos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card-icono {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-icono.clickable {
+    cursor: pointer;
+    border: 2px solid var(--secondary-color);
+}
+
+.card-icono.clickable:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icono i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+/* ==========================================
+   5. PERSONALIZADOR Y VISTA PREVIA
+   ========================================== */
+.customizer-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.panel-opciones {
+    flex: 1;
+    min-width: 280px;
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    text-align: left;
+}
+
+.grupo-control {
+    margin-bottom: 20px;
+}
+
+.grupo-control label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+select,
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+select:focus,
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+}
+
+.botones-estilo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.botones-estilo button {
+    padding: 8px 12px;
+    border: 1px solid var(--secondary-color);
+    background: var(--bg-card);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.botones-estilo button:hover {
+    background: #fff3bf;
+}
+
+.precio-box h3 {
+    color: var(--success-color);
+    margin-bottom: 15px;
+}
+
+.btn-whatsapp {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--whatsapp-color);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: filter 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+    filter: brightness(0.95);
+}
+
+.vista-previa {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 10px;
+}
+
+/* Base gráfica para la previsualización */
+.canvas-ceramica {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+}
+
+.badge-tipo {
+    position: absolute;
+    top: 15px;
+    background: var(--accent-yellow);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.icono-diseno {
+    font-size: 3.5rem;
+    margin: 10px 0;
+    z-index: 10;
+}
+
+.texto-personalizado {
+    font-weight: bold;
+    color: var(--text-dark);
+    max-width: 80%;
+    word-wrap: break-word;
+    z-index: 10;
+    text-align: center;
+}
+
+/* ------------------------------------------
+   FORMAS Y COLORES ESPECÍFICOS POR PIEZA
+   ------------------------------------------ */
+
+/* 1. TAZA: Cuerpo naranja cilíndrico con ASA visible */
+.canvas-ceramica.pieza-taza {
+    width: 210px;
+    height: 240px;
+    background: linear-gradient(135deg, #ffe0d1 0%, #f4a261 100%);
+    border: 6px solid #e76f51;
+    border-radius: 12px 12px 40px 40px;
+    margin-right: 35px;
+    box-shadow: 0 10px 20px rgba(231, 111, 81, 0.25);
+}
+
+.canvas-ceramica.pieza-taza::after {
+    content: '';
+    position: absolute;
+    right: -42px;
+    top: 45px;
+    width: 42px;
+    height: 110px;
+    border: 8px solid #e76f51;
+    border-left: none;
+    border-radius: 0 30px 30px 0;
+    background: transparent;
+}
+
+.canvas-ceramica.pieza-taza .badge-tipo {
+    background: #e76f51;
+}
+
+/* 2. PLATO: Círculo de porcelana con sombras de profundidad */
+.canvas-ceramica.pieza-plato {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, #ffffff 50%, #f7ede2 80%, #e0a96d 100%);
+    border: 10px double #d4a373;
+    border-radius: 50%;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15), 0 10px 25px rgba(212, 163, 115, 0.3);
+    margin-right: 0;
+}
+
+.canvas-ceramica.pieza-plato .badge-tipo {
+    background: #d4a373;
+}
+
+/* 3. MATERA: Silueta terracota cónica con base */
+.canvas-ceramica.pieza-matera {
+    width: 220px;
+    height: 230px;
+    background: linear-gradient(180deg, #e78f6a 0%, #b85b35 100%);
+    border-top: 14px solid #8f3d1b;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 8px solid #8f3d1b;
+    border-radius: 4px;
+    margin-right: 0;
+    box-shadow: 0 12px 20px rgba(143, 61, 27, 0.3);
+}
+
+.canvas-ceramica.pieza-matera::after {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    width: 170px;
+    height: 14px;
+    background: #8f3d1b;
+    border-radius: 0 0 10px 10px;
+}
+
+.canvas-ceramica.pieza-matera .badge-tipo {
+    background: #8f3d1b;
+    top: 10px;
+}
+
+.canvas-ceramica.pieza-matera .texto-personalizado {
+    color: #ffffff;
+}
+
+/* 4. CUADRO: Retablo azulejo azul con marco de madera */
+.canvas-ceramica.pieza-cuadro {
+    width: 250px;
+    height: 250px;
+    background: #e3effd;
+    border: 14px solid #1d3557;
+    border-radius: 6px;
+    box-shadow: 0 12px 25px rgba(29, 53, 87, 0.3);
+    margin-right: 0;
+}
+
+.canvas-ceramica.pieza-cuadro::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px dashed #a2c4ec;
+    pointer-events: none;
+}
+
+.canvas-ceramica.pieza-cuadro .badge-tipo {
+    background: #1d3557;
+}
+
+/* ==========================================
+   6. ASISTENTE Y COMENTARIOS
+   ========================================== */
+.asistente-bg {
+    background-color: #fff3bf;
+    border-radius: var(--radius-md);
+}
+
+.asistente-box {
+    max-width: 500px;
+    margin: 20px auto 0;
+}
+
+.asistente-box select {
+    margin-bottom: 15px;
+}
+
+.asistente-box button {
+    padding: 10px 20px;
+    background: var(--text-dark);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+.respuesta-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.grid-comentarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card-comentario {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    font-style: italic;
+}
+
+/* ==========================================
+   7. PIE DE PÁGINA Y FLOTANTES
+   ========================================== */
+footer {
+    background-color: #212529;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.frase-motivacional {
+    font-style: italic;
+    color: var(--accent-yellow);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    /* Distancia desde abajo */
+    right: 40px;
+    /* Distancia desde la derecha */
+    background-color: #25d366;
+    /* Verde original de WhatsApp */
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    /* Asegura que quede por encima de todo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el cursor por encima */
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    /* Verde más oscuro */
+    transform: scale(1.1);
+    /* Se agranda un poco */
+}
+
+/* Tamaño de la imagen/icono dentro del botón */
+.whatsapp-icon {
+    width: 35px;
+    height: 35px;
+}
+
+/* Adaptación para pantallas móviles */
+@media only screen and (max-width: 600px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-icon {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+}
+
+/* ==========================================
+   8. MODAL DE EMPAQUES (SWEETALERT2)
+   ========================================== */
+.empaques-grid-modal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    text-align: left;
+}
+
+.empaques-grid-modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.empaques-grid-modal::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.card-empaque-modal {
+    background: #fdf8f5;
+    border: 1px solid #f3d5c8;
+    padding: 12px;
+    border-radius: 10px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-empaque-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-color);
+}
+
+.num-item {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    background: #ffe3d1;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* ==========================================
+   9. MODALES DE CATÁLOGO CON IMÁGENES (CREACIÓN, EMPAQUES, MANUALIDADES)
+   ========================================== */
+.modal-ancho-catalogo {
+    max-width: 940px !important;
+    width: 95% !important;
+}
+
+.catalogo-grid-modal {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 15px;
+    max-height: 480px;
+    overflow-y: auto;
+    padding: 10px 4px;
+    text-align: left;
+}
+
+.catalogo-grid-modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.catalogo-grid-modal::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.card-catalogo-item {
+    background: #ffffff;
+    border: 1px solid #f2dbd1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-catalogo-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(232, 93, 4, 0.16);
+    border-color: var(--primary-color);
+}
+
+.card-catalogo-item .num-item {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: rgba(232, 93, 4, 0.92);
+    padding: 2px 7px;
+    border-radius: 6px;
+    z-index: 5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-container {
+    width: 100%;
+    height: 145px;
+    background: #f7f7f7;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.producto-img-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.card-img-container:hover .producto-img-thumb {
+    transform: scale(1.08);
+}
+
+.zoom-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.card-img-container:hover .zoom-badge {
+    opacity: 1;
+}
+
+.card-catalogo-info {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.card-catalogo-info strong {
+    font-size: 0.92rem;
+    color: var(--text-dark);
+    display: block;
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+
+.card-catalogo-info .desc-text {
+    font-size: 0.77rem;
+    color: #666;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px dashed #f0ded4;
+}
+
+.precio-destacado {
+    color: var(--success-color);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.btn-pedir-directo {
+    background: #25d366;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-pedir-directo:hover {
+    background: #1eb954;
+    transform: scale(1.04);
+}
+
+@media (max-width: 600px) {
+    .catalogo-grid-modal {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .card-img-container {
+        height: 120px;
+    }
+}

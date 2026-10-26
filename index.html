@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alma de Colores 🎨​🖌️​ | Cerámicas y Manualidades</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Alma de Colores 🎨​🖌️​🦉</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#personalizador">Diseña tu Cerámica</a></li>
+                <li><a href="#asistente">Asistente Virtual</a></li>
+                <li><a href="#testimonios">Comentarios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Arte, cerámica y detalles hechos a mano 🎨​🖌️​✨</h2>
+            <p>Crea piezas únicas con tu propio estilo y mensajes especiales.</p>
+            <a href="#personalizador" class="btn-main">¡Diseñar Ahora! 🚀​​🕶️​</a>
+        </div>
+
+    </section>
+
+    <section id="servicios" class="icon-section">
+        <h2>Lo que ofrecemos</h2>
+        <div class="grid-iconos">
+            <div class="card-icono clickable" onclick="abrirModalEmpaques()">
+                <i class="fa-solid fa-boxes-packing"></i>
+                <h3>Empaques Ecológicos ♻️</h3>
+                <p>Haz clic para explorar nuestros empaques y bolsas sostenibles.</p>
+            </div>
+            <div class="card-icono clickable" onclick="abrirModalCreacion()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Creación 🎭</h3>
+                <p>ceramicas sin pintar escoje la tuya y te la hacemos a tu gusto</p>
+            </div>
+            <div class="card-icono clickable" onclick="abrirModalRegalos()">
+                <i class="fa-solid fa-gift"></i>
+                <h3>Regalos 🛍️</h3>
+                <p>Detalles únicos para cumpleaños y momentos especiales.</p>
+            </div>
+            <div class="card-icono clickable" onclick="abrirModalManualidades()">
+                <i class="fa-solid fa-hands-holding-circle"></i>
+                <h3>Manualidades 🖼️</h3>
+                <p>Gran variedad de figuras, cuadros y recuerdos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="personalizador" class="section-container">
+        <h2>🏺 Diseña tu propia cerámica y descubre el placer de moldear tus ideas desde cero 🏺</h2>
+        <p class="subtitle">Personaliza tu producto en tiempo real antes de realizar el pedido.</p>
+
+        <div class="customizer-wrapper">
+            <div class="panel-opciones">
+                <div class="grupo-control">
+                    <label for="tipoCeramica">1. Escoge la pieza:</label>
+                    <select id="tipoCeramica" onchange="actualizarVista()">
+                        <option value="taza" data-precio="25000">☕ Taza ($25.000)</option>
+                        <option value="plato" data-precio="30000">🍽️ Plato ($30.000)</option>
+                        <option value="matera" data-precio="28000">🪴 Matera ($28.000)</option>
+                        <option value="cuadro" data-precio="35000">🖼️ Cuadro ($35.000)</option>
+                    </select>
+                </div>
+
+                <div class="grupo-control">
+                    <label>2. Escoge un diseño:</label>
+                    <div class="botones-estilo">
+                        <button type="button" onclick="cambiarDiseno('Flores', 0)">🌸 Flores (Gratis)</button>
+                        <button type="button" onclick="cambiarDiseno('Mascotas', 3000)">🐶 Mascotas (+$3.000)</button>
+                        <button type="button" onclick="cambiarDiseno('Fútbol', 2000)">⚽ Fútbol (+$2.000)</button>
+                        <button type="button" onclick="cambiarDiseno('Amor', 2000)">❤️ Amor (+$2.000)</button>
+                    </div>
+                </div>
+
+                <div class="grupo-control">
+                    <label for="nombreText">3. Texto o Nombre personalizado:</label>
+                    <input type="text" id="nombreText" placeholder="Escribe tu mensaje aquí..." maxlength="25"
+                        oninput="cambiarNombre()">
+                </div>
+
+                <div class="precio-box">
+                    <h3>Precio estimado: <span id="precioTotal">$25.000 COP</span></h3>
+                </div>
+
+                <button type="button" class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
+                    <i class="fa-brands fa-whatsapp"></i> Enviar mi pedido por WhatsApp
+                </button>
+            </div>
+
+            <div class="vista-previa">
+                <div class="canvas-ceramica pieza-taza" id="canvasCeramica">
+                    <div class="badge-tipo" id="vistaTipo">Taza</div>
+                    <div class="icono-diseno" id="vistaDiseno">🌸</div>
+                    <div class="texto-personalizado" id="vistaNombre">Tu mensaje aquí</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="asistente" class="section-container asistente-bg">
+        <h2>💡​💻💡​​ Asistente de Diseño Virtual</h2>
+        <p>¿No sabes qué regalar? Selecciona una opción y te ayudaremos:</p>
+
+        <div class="asistente-box">
+            <select id="opcionAsistente">
+                <option value="mamá">​🎁​👩‍👦​💓​ Quiero algo para mi mamá</option>
+                <option value="cumple">🥳​🎂🎉​ Quiero algo para un cumpleaños</option>
+                <option value="pareja">❤️💑❤️​ Quiero un regalo para mi pareja</option>
+                <option value="oficina">🖊️​🧑‍💻​ Quiero algo para mi escritorio</option>
+            </select>
+            <button type="button" onclick="consultarAsistente()">Consultar Asistente ✨</button>
+        </div>
+    </section>
+
+    <section id="testimonios" class="section-container">
+        <h2>💬 Comentarios de Clientes</h2>
+        <div class="grid-comentarios">
+            <div class="card-comentario">
+                <p>"¡Me encantó la taza personalizada! Llegó súper rápido y con un empaque hermoso. ⭐⭐⭐⭐⭐"</p>
+            </div>
+            <div class="card-comentario">
+                <p>"El diseño interactivo me permitió armar la matera justo como la quería. Súper recomendado. 🪴✨"</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="frase-motivacional">"Cada creación hecha a mano lleva un pedacito de nuestro corazón y el alma de tus
+            ideas." ❤️</p>
+        <p>&copy; 2026 Alma de Colores 🎨 - Proyecto de Grado Técnico en Sistemas</p>
+    </footer>
+
+    <a href="https://wa.me/57321584727?text=Hola%20Alma%20de%20Colores,%20quisiera%20más%20información%20sobre%20sus%20manualidades."
+        class="whatsapp-float" target="_blank" aria-label="Contacto por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Librería SweetAlert2 y Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
